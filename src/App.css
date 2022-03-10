@@ -1,6 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Rosario:wght@400;700&display=swap');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.App{
+    
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border: 1px solid red;
+    height: 100vh;
+}
+
+.div1{
+    background: linear-gradient(180deg, rgba(154, 231, 255, 0.2) 0%, rgba(0, 0, 0, 0) 85.11%), #0ADCEA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.div1 h1{
+    font-family: 'Rosario', sans-serif;
+    font-size: 2.5rem;
+    
+}
+
+.div2{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:30px;
+}
+
+.div2 h2{
+    font-size: 2rem;
 }
