@@ -46,3 +46,47 @@ body{
 .div2 h2{
     font-size: 2rem;
 }
+
+form{
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid red;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.infoTitle{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #9F9F9F;
+
+}
+input, select{
+    max-width: 100%;
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+}
+option{
+    width: 100px;
+}
+
+.userInfo, .petInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputGrid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.inputGrid section{
+    overflow-x: auto;
+}

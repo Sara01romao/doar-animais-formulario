@@ -1,7 +1,9 @@
 
 import './App.css';
 import Input from './components/Input';
-import Dog from './assets/icon-pata.svg' 
+import dogIcon from './assets/icon-pata.svg'; 
+import userIcon from './assets/user.svg';
+import dogFace from './assets/dogs.svg'
 import { useEffect, useState } from 'react';
 
 
@@ -13,8 +15,9 @@ function App() {
   const [estados, setEstados] = useState([]);
   const [cidades, setCidades] = useState([]);
   const [cidade, setCidade] = useState('');
+  const [animal, setAnimal] = useState('')
 
-  console.log(cidade, "selecionado")
+  console.log(cidade, "selecionado");
 
   function handleSubmit(event){
       event.preventDefault();
@@ -24,8 +27,20 @@ function App() {
 
       console.table(cadastro)
 
-
+  
+  
   }
+  
+  useEffect(()=>{
+    async function fecthEstados(){
+        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+        const data = await response.json();
+        setEstados(data);
+    }
+
+    fecthEstados()
+
+  },[])
 
   useEffect(()=>{
       async function fecthCidade(){
@@ -38,46 +53,94 @@ function App() {
   },[estado])
 
 
-    useEffect(()=>{
-      async function fecthEstados(){
-          const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
-          const data = await response.json();
-          setEstados(data);
-      }
-
-      fecthEstados()
-
-    },[])
+   
 
 
   return (
     <div className="App">
       <div className='div1'>
-          <img src={Dog} alt=''/>
+          <img src={dogIcon} alt=''/>
           <h1>Doar animais</h1>
       </div>
 
       <div className='div2'>
         <h2>Cadastrar</h2>
         <form onSubmit={handleSubmit}>
-          <Input title="Nome" id="nome" value={nome} setValue={setNome}/>
-          <Input title="Whatsapp" id="whatsapp" value={whatsapp} setValue={setWhatsapp}/>
+          <div className='userInfo'>
+             <div className='infoTitle'>
+               <img src={userIcon} alt="Informação usuário"/>
+               <h3>Informações do Doador</h3>
+             </div>
 
-          <select id="estado" value={estado} onChange={({target}) => setEstado(target.value)}>
-               <option value='' disabled>Selecione</option>
-              {estados.map((uf)=> <option value={uf.sigla} key={uf.id}>{uf.sigla}</option>)}
-          </select>
+              <Input title="Nome" id="nome" value={nome} setValue={setNome}/>
+              <Input title="Whatsapp" id="whatsapp" value={whatsapp} setValue={setWhatsapp}/>
+
+              <div className='inputGrid'>
+                  <div>
+                        <label htmlFor="estado">Estado</label><br/>
+                        <select id="estado" value={estado} onChange={({target}) => setEstado(target.value)}>
+                            <option value='' disabled>Selecione</option>
+                            {estados.map((uf)=> <option value={uf.sigla} key={uf.id}>{uf.sigla}</option>)}
+                        </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="cidade">Cidade</label><br/>
+                            {estado === ''
+                        ? 
+                            <select id="cidade" value={cidade} onChange={({target}) => setCidade(target.value)}>
+                                <option value='' disabled>Selecione</option>
+                            </select>
+                        :
+
+                            <select id="cidade" value={cidade} onChange={({target}) => setCidade(target.value)}>
+                              <option value='' disabled>Selecione</option>
+                              {cidades.map((cidade)=> <option value={cidade.nome} key={cidade.id}>{cidade.nome}</option>)}
+                            </select>
+                        }
+                  </div>
+              </div>
+
+          </div>
+
+          <div className='petInfo'>
+              <div className='infoTitle'>
+                <img src={dogFace} alt="Informação usuário"/>
+                <h3>Informações do Animal</h3>
+              </div>
+
+              <div>
+                      <div>
+                          <label htmlFor="animal">Animal</label><br/>
+                          <select id="animal" value={animal} onChange={({target}) => setAnimal(target.value)}>
+                              <option value='' disabled>Selecione</option>
+                              <option value='Cachorro'>Cachorro</option>
+                              <option value='Gato'>Gato</option>
+                              <option value='Coelho'>Coelho</option>
+                              <option value='Passáro'>Pássaro</option>
+                              
+                          </select>
+                      </div>
+
+                      <div>
+                        <label htmlFor="sexo">Sexo</label><br/>
+                        <label>
+                           Fêmia
+                            <input
+                              type="radio"
+
+
+
+                            />
+                        </label>
+                       
+                      </div>
+
+              </div>
+          </div>
+         
               
-          {estado === ''? 
-          <select id="cidade" value={cidade} onChange={({target}) => setCidade(target.value)}>
-               <option value='' disabled>Selecione</option>
-          </select>:
-
-            <select id="cidade" value={cidade} onChange={({target}) => setCidade(target.value)}>
-              <option value='' disabled>Selecione</option>
-              {cidades.map((cidade)=> <option value={cidade.nome} key={cidade.id}>{cidade.nome}</option>)}
-            </select>
-          }
+         
               
          
           {console.log(estado)}
