@@ -3,7 +3,7 @@ import './App.css';
 import Input from './components/Input';
 import Dog from './assets/icon-pata.svg' 
 import { useEffect, useState } from 'react';
-import Select from './components/select';
+
 
 function App() {
   const [nome, setNome] = useState('');
@@ -11,6 +11,10 @@ function App() {
   const [cadastro, setCadastro] = useState({});
   const [estado, setEstado] = useState('');
   const [estados, setEstados] = useState([]);
+  const [cidades, setCidades] = useState([]);
+  const [cidade, setCidade] = useState('');
+
+  console.log(cidade, "selecionado")
 
   function handleSubmit(event){
       event.preventDefault();
@@ -22,6 +26,16 @@ function App() {
 
 
   }
+
+  useEffect(()=>{
+      async function fecthCidade(){
+        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/distritos`);
+        const data = await response.json();
+        setCidades(data)
+      }
+
+      fecthCidade()
+  },[estado])
 
 
     useEffect(()=>{
@@ -49,7 +63,21 @@ function App() {
           <Input title="Nome" id="nome" value={nome} setValue={setNome}/>
           <Input title="Whatsapp" id="whatsapp" value={whatsapp} setValue={setWhatsapp}/>
 
-          <Select id="estado" value={estado} setValue={setEstado} estados={estados}/>
+          <select id="estado" value={estado} onChange={({target}) => setEstado(target.value)}>
+               <option value='' disabled>Selecione</option>
+              {estados.map((uf)=> <option value={uf.sigla} key={uf.id}>{uf.sigla}</option>)}
+          </select>
+              
+          {estado === ''? 
+          <select id="cidade" value={cidade} onChange={({target}) => setCidade(target.value)}>
+               <option value='' disabled>Selecione</option>
+          </select>:
+
+            <select id="cidade" value={cidade} onChange={({target}) => setCidade(target.value)}>
+              <option value='' disabled>Selecione</option>
+              {cidades.map((cidade)=> <option value={cidade.nome} key={cidade.id}>{cidade.nome}</option>)}
+            </select>
+          }
               
          
           {console.log(estado)}
