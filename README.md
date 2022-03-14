@@ -9,7 +9,7 @@
 ## 💻  Sobre o Projeto
 
 Projeto de cadastro de animais para doação.
-Objetivo práticar a criação de formulário e uso da API do IBGE de localidades, para pegar os estados e suas cidades.
+Objetivo práticar a criação de formulário e usar a API do IBGE de localidades, para pegar os estados e suas cidades.
 
 <br>
 
