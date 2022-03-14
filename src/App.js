@@ -3,8 +3,10 @@ import './App.css';
 import Input from './components/Input';
 import dogIcon from './assets/icon-pata.svg'; 
 import userIcon from './assets/user.svg';
-import dogFace from './assets/dogs.svg'
+import dogFace from './assets/dogs.svg';
+import camera from './assets/camera-icon.svg';
 import { useEffect, useState } from 'react';
+import Modal from './components/Modal';
 
 
 function App() {
@@ -16,15 +18,17 @@ function App() {
   const [cidades, setCidades] = useState([]);
   const [cidade, setCidade] = useState('');
   const [animal, setAnimal] = useState('')
-  const [sexo, setSexo] = useState('')
+  const [sexo, setSexo] = useState('');
+  const [imagem, setImagem] = useState('');
 
- 
+  
+
 
   function handleSubmit(event){
       event.preventDefault();
     /*   console.log(`The name you entered was: ${nome}`);
       console.log(`The name you entered was: ${whatsapp}`); */
-      setCadastro({...cadastro, nome:nome, telefone:whatsapp })
+      setCadastro({...cadastro, nome:nome, telefone:whatsapp, estado:estado, cidade:cidade, img:imagem})
 
       console.table(cadastro)
 
@@ -104,13 +108,15 @@ function App() {
 
           </div>
 
+          <hr/>
+
           <div className='petInfo'>
               <div className='infoTitle'>
                 <img src={dogFace} alt="Informação usuário"/>
                 <h3>Informações do Animal</h3>
               </div>
 
-              <div className='inputGrid'>
+              <div className='inputGrid2'>
                       <div>
                           <label htmlFor="animal">Animal</label><br/>
                           <select id="animal" value={animal} onChange={({target}) => setAnimal(target.value)}   menuPlacement="top">
@@ -149,8 +155,15 @@ function App() {
                         
                        
                       </div>
-
               </div>
+
+               <div>        
+                <label htmlFor='imagem'>Foto</label>
+                <div className='addImg'> 
+                  <img src={camera} alt="Adiconar imagem"/>
+                  <input type="file" id='imagem' title="" value={imagem} accept="image/png, image/jpeg" onChange={({target}) => setImagem(target.value)}/>
+                </div>
+              </div> 
           </div>
          
               
@@ -162,7 +175,7 @@ function App() {
         </form>
         
       </div>
-     
+     <Modal/>
     </div>
   );
 }
