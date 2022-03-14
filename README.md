@@ -28,7 +28,7 @@ React input-mask
 ## API IBGE - localidades
 
 ```
-- Acessar de doc api: 
+- Acessar doc api: 
   https://servicodados.ibge.gov.br/api/docs/localidades
 
 
