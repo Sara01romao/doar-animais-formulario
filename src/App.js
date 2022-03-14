@@ -16,8 +16,9 @@ function App() {
   const [cidades, setCidades] = useState([]);
   const [cidade, setCidade] = useState('');
   const [animal, setAnimal] = useState('')
+  const [sexo, setSexo] = useState('')
 
-  console.log(cidade, "selecionado");
+ 
 
   function handleSubmit(event){
       event.preventDefault();
@@ -109,10 +110,10 @@ function App() {
                 <h3>Informações do Animal</h3>
               </div>
 
-              <div>
+              <div className='inputGrid'>
                       <div>
                           <label htmlFor="animal">Animal</label><br/>
-                          <select id="animal" value={animal} onChange={({target}) => setAnimal(target.value)}>
+                          <select id="animal" value={animal} onChange={({target}) => setAnimal(target.value)}   menuPlacement="top">
                               <option value='' disabled>Selecione</option>
                               <option value='Cachorro'>Cachorro</option>
                               <option value='Gato'>Gato</option>
@@ -124,15 +125,28 @@ function App() {
 
                       <div>
                         <label htmlFor="sexo">Sexo</label><br/>
-                        <label>
-                           Fêmia
-                            <input
-                              type="radio"
+                        <div className='sexoContent'>
+                            <label>
+                              Fêmea
+                                <input
+                                  type="radio"
+                                  value="Fêmea"
+                                  name="sexo"
+                                  onChange={({target}) => setSexo(target.value)}
+                                />
+                            </label>
 
-
-
-                            />
-                        </label>
+                            <label>
+                              Macho
+                                <input
+                                  type="radio"
+                                  value="Macho"
+                                  name="sexo"
+                                  onChange={({target}) => setSexo(target.value)}
+                                />
+                            </label>
+                        </div>
+                        
                        
                       </div>
 
@@ -143,7 +157,7 @@ function App() {
          
               
          
-          {console.log(estado)}
+          {console.log(sexo, "sexo")}
          <button>Cadastrar</button>
         </form>
         
