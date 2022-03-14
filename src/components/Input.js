@@ -1,14 +1,15 @@
 
-import React, { useState } from 'react'
+import React from 'react';
+import InputMask from "react-input-mask";
 
 
-export default function Input({title, id, value, setValue}) {
+export default function Input({title, id, value, setValue, mask}) {
 
  
   return (
     <div>
     <label htmlFor={id}>{title}</label><br/>
-    <input type='text' id={id} value={value} onChange={({target}) => setValue(target.value)}/>
+    <InputMask mask={mask} type='text' id={id} value={value} onChange={({target}) => setValue(target.value)} required />
    </div>
   )
 }

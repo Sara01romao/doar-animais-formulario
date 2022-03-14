@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
 import Input from './components/Input';
@@ -5,8 +8,7 @@ import dogIcon from './assets/icon-pata.svg';
 import userIcon from './assets/user.svg';
 import dogFace from './assets/dogs.svg';
 import camera from './assets/camera-icon.svg';
-import { useEffect, useState } from 'react';
-import Modal from './components/Modal';
+
 
 
 function App() {
@@ -21,19 +23,25 @@ function App() {
   const [sexo, setSexo] = useState('');
   const [imagem, setImagem] = useState('');
 
-  
-
 
   function handleSubmit(event){
       event.preventDefault();
-    /*   console.log(`The name you entered was: ${nome}`);
-      console.log(`The name you entered was: ${whatsapp}`); */
-      setCadastro({...cadastro, nome:nome, telefone:whatsapp, estado:estado, cidade:cidade, img:imagem})
+    
+      setCadastro({...cadastro, nome:nome, telefone:whatsapp, estado:estado, cidade:cidade, img:imagem, sexo:sexo})
+      console.log(cadastro)
 
-      console.table(cadastro)
+      toast(`${animal} Cadastrado com sucesso :)`)
 
-  
-  
+      setNome('');
+      setWhatsapp('');
+      setCidade('');
+      setEstado('');
+      setAnimal('');
+      setSexo('');
+      setImagem('');
+
+
+
   }
   
   useEffect(()=>{
@@ -78,7 +86,7 @@ function App() {
              </div>
 
               <Input title="Nome" id="nome" value={nome} setValue={setNome}/>
-              <Input title="Whatsapp" id="whatsapp" value={whatsapp} setValue={setWhatsapp}/>
+              <Input title="Whatsapp" id="whatsapp" value={whatsapp} setValue={setWhatsapp} mask="(99)99999-9999"/>
 
               <div className='inputGrid'>
                   <div>
@@ -119,7 +127,7 @@ function App() {
               <div className='inputGrid2'>
                       <div>
                           <label htmlFor="animal">Animal</label><br/>
-                          <select id="animal" value={animal} onChange={({target}) => setAnimal(target.value)}   menuPlacement="top">
+                          <select id="animal" value={animal} onChange={({target}) => setAnimal(target.value)}>
                               <option value='' disabled>Selecione</option>
                               <option value='Cachorro'>Cachorro</option>
                               <option value='Gato'>Gato</option>
@@ -166,16 +174,12 @@ function App() {
               </div> 
           </div>
          
-              
-         
-              
-         
-          {console.log(sexo, "sexo")}
          <button>Cadastrar</button>
+         <ToastContainer autoClose={2000}/>
         </form>
         
       </div>
-     <Modal/>
+   
     </div>
   );
 }
