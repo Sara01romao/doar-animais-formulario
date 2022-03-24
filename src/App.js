@@ -39,9 +39,6 @@ function App() {
       setAnimal('');
       setSexo('');
       setImagem('');
-
-
-
   }
   
   useEffect(()=>{
@@ -57,17 +54,13 @@ function App() {
 
   useEffect(()=>{
       async function fecthCidade(){
-        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/distritos`);
+        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/distritos?orderBy=nome`);
         const data = await response.json();
         setCidades(data)
       }
 
       fecthCidade()
   },[estado])
-
-
-   
-
 
   return (
     <div className="App">
