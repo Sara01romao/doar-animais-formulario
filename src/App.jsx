@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
-import Input from './components/Input';
+import {Input} from './components/Input';
 import dogIcon from './assets/icon-pata.svg'; 
 import userIcon from './assets/user.svg';
 import dogFace from './assets/dogs.svg';
@@ -11,7 +11,7 @@ import camera from './assets/camera-icon.svg';
 
 
 
-function App() {
+export function App() {
   const [nome, setNome] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [cadastro, setCadastro] = useState({});
@@ -177,4 +177,4 @@ function App() {
   );
 }
 
-export default App;
+
