@@ -39,6 +39,8 @@ export function App() {
       setAnimal('');
       setSexo('');
       setImagem('');
+
+      localStorage.setItem('animalCadastro',  JSON.stringify(cadastro))
   }
   
   useEffect(()=>{
