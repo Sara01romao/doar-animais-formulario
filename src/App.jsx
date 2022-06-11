@@ -11,6 +11,7 @@ import camera from './assets/camera-icon.svg';
 
 
 
+
 export function App() {
   const [nome, setNome] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -30,8 +31,10 @@ export function App() {
       setCadastro({...cadastro, nome:nome, telefone:whatsapp, estado:estado, cidade:cidade, img:imagem, sexo:sexo})
       console.log(cadastro)
 
-      toast(`${animal} Cadastrado com sucesso :)`)
+      if(cadastro){
 
+        toast(`${animal} Cadastrado com sucesso :)`)
+      }
       setNome('');
       setWhatsapp('');
       setCidade('');
@@ -40,7 +43,7 @@ export function App() {
       setSexo('');
       setImagem('');
 
-      localStorage.setItem('animalCadastro',  JSON.stringify(cadastro))
+     
   }
   
   useEffect(()=>{
@@ -174,6 +177,7 @@ export function App() {
         </form>
         
       </div>
+
    
     </div>
   );
